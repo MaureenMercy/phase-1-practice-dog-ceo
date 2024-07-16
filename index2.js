@@ -1,11 +1,9 @@
-console.log('%c HI', 'color: firebrick')
 // Constants
 const imgUrl = "https://dog.ceo/api/breeds/image/random/4";
 const breedUrl = "https://dog.ceo/api/breeds/list/all";
 
 // DOM Elements
 const imageContainer = document.getElementById('dog-image-container');
-const breedDropdown = document.getElementById('breed-dropdown');
 const breedList = document.getElementById('dog-breeds');
 
 // Fetch and display dog images
@@ -37,34 +35,15 @@ function fetchDogBreeds() {
 
 // Display breeds in the list
 function displayBreeds(breeds) {
-  breedList.innerHTML = '';
   breeds.forEach(breed => {
     const li = document.createElement('li');
     li.textContent = breed;
-    li.addEventListener('click', () => {
-      li.style.color = 'red';  // Change color on click
-    });
     breedList.appendChild(li);
   });
 }
 
-// Filter breeds based on dropdown selection
-function filterBreeds() {
-  const selectedLetter = breedDropdown.value;
-  const allBreeds = Array.from(breedList.children);
-  
-  allBreeds.forEach(breedItem => {
-    if (breedItem.textContent.startsWith(selectedLetter)) {
-      breedItem.style.display = '';
-    } else {
-      breedItem.style.display = 'none';
-    }
-  });
-}
-
-// Event listeners
+// Event listener for DOMContentLoaded
 document.addEventListener('DOMContentLoaded', () => {
   fetchDogImages();
   fetchDogBreeds();
-  breedDropdown.addEventListener('change', filterBreeds);
 });
